@@ -1,3 +1,5 @@
+![block](./images/title.gif)
+
 # GaussianDreamer: Fast Generation from Text to 3D Gaussian Splatting with Point Cloud Priors
 ### [Project Page](https://taoranyi.com/gaussiandreamer/) | [Arxiv Paper](https://arxiv.org/abs/2310.08529)
 
