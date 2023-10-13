@@ -19,7 +19,7 @@ If you find this repository/work helpful in your research, welcome to cite the p
 @article{GaussianDreamer,
         title={GaussianDreamer: Fast Generation from Text to 3D Gaussian Splatting with Point Cloud Priors},
         author={Taoran Yi and Jiemin Fang and Guanjun Wu and Lingxi Xie and Xiaopeng Zhang and Wenyu Liu and Qi Tian and Xinggang Wang},
-        journal={arxiv,
+        journal={arxiv:2310.08529},
         year={2023}
         }
 ```
