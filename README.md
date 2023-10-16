@@ -6,7 +6,7 @@
 [GaussianDreamer: Fast Generation from Text to 3D Gaussian Splatting with Point Cloud Priors](https://taoranyi.com/gaussiandreamer/)  
 
 [Taoran Yi](https://github.com/taoranyi)<sup>1</sup>,
-[Jiemin Fang](https://jaminfong.cn/)<sup>2</sup>,[Guanjun Wu](https://guanjunwu.github.io/)<sup>3</sup>,  [Lingxi Xie](http://lingxixie.com/)<sup>2</sup>, </br>[Xiaopeng Zhang](https://sites.google.com/site/zxphistory/)<sup>2</sup>,[Wenyu Liu](http://eic.hust.edu.cn/professor/liuwenyu/)<sup>1</sup>, [Qi Tian](https://scholar.google.com/citations?hl=en&user=61b6eYkAAAAJ)<sup>2</sup> , [Xinggang Wang](https://xinggangw.info/)<sup>✉1</sup>
+[Jiemin Fang](https://jaminfong.cn/)<sup>2</sup>,[Guanjun Wu](https://guanjunwu.github.io/)<sup>3</sup>,  [Lingxi Xie](http://lingxixie.com/)<sup>2</sup>, </br>[Xiaopeng Zhang]([https://sites.google.com/site/zxphistory/](https://scholar.google.com/citations?user=Ud6aBAcAAAAJ&hl=zh-CN))<sup>2</sup>,[Wenyu Liu](http://eic.hust.edu.cn/professor/liuwenyu/)<sup>1</sup>, [Qi Tian](https://www.qitian1987.com/)<sup>2</sup> , [Xinggang Wang](https://xwcv.github.io/)<sup>✉1</sup>
 
 <sup>1</sup>School of EIC, HUST &emsp;<sup>2</sup>Huawei Inc. &emsp; <sup>3</sup>School of CS, HUST &emsp; 
 
