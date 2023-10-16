@@ -32,6 +32,7 @@ pip install ./gaussiansplatting/submodules/diff-gaussian-rasterization
 pip install ./gaussiansplatting/submodules/simple-knn
 
 git clone https://github.com/openai/shap-e.git
+cd shap-e
 pip install -e .
 ```
 Download [finetuned Shap-E](https://huggingface.co/datasets/tiange/Cap3D/tree/main/our_finetuned_models) by Cap3D, and put it in `./load`
