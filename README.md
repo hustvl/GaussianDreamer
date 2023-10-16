@@ -20,7 +20,6 @@ In recent times, the generation of 3D assets from text prompts has shown impress
 
 ## 🏁 Get Started
 **Installation**
-
 Install [3D Gaussian Splatting](https://github.com/graphdeco-inria/gaussian-splatting) and [Shap-E](https://github.com/openai/shap-e#usage) as fellow:
 ```
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
@@ -36,6 +35,8 @@ pip install ./gaussiansplatting/submodules/simple-knn
 git clone https://github.com/openai/shap-e.git
 pip install -e .
 ```
+Download [finetuned Shap-E](https://huggingface.co/datasets/tiange/Cap3D/tree/main/our_finetuned_models) by Cap3D, and put it in `./load`
+
 **Quickstart**
 ```
 python launch.py --config configs/gaussiandreamer-sd.yaml --train --gpu 0 system.prompt_processor.prompt="a fox"

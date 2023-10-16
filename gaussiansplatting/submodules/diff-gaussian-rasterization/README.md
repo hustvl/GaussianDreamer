@@ -1,6 +1,11 @@
 # Differential Gaussian Rasterization
 
-Used as the rasterization engine for the paper "3D Gaussian Splatting for Real-Time Rendering of Radiance Fields". If you can make use of it in your own research, please be so kind to cite us.
+This is a forked repository of the rasterization pipeline from the paper "3D Gaussian Splatting for Real-Time Rendering of Radiance Fields". I have made some extensions to it: 
+
+- main branch incorporates only the forward pass of depth, which is used for depth visualization. 
+- 4th-degree: add the 4th degree of SH
+- depth: add both the forward and backward pass of depth, which is used for some tasks with depth supervision.
+- latest: is the dev branch that contains acc and depth visualization, together with depth backward pass. 
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">

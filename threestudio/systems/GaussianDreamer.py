@@ -100,7 +100,7 @@ class GaussianDreamer(BaseLift3DSystem):
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         xm = load_model('transmitter', device=device)
         model = load_model('text300M', device=device)
-        model.load_state_dict(torch.load('/data/taoranyi/3dgs/Cap3D/text-to-3D/shap-e/model_ckpts/shapE_finetuned_with_330kdata.pth', map_location=device)['model_state_dict'])
+        model.load_state_dict(torch.load('./load/shapE_finetuned_with_330kdata.pth', map_location=device)['model_state_dict'])
         diffusion = diffusion_from_config_shape(load_config('diffusion'))
 
         batch_size = 1
