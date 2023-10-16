@@ -13,10 +13,37 @@
 ![block](./images/architecture.jpg)
 In recent times, the generation of 3D assets from text prompts has shown impressive results. Both 2D and 3D diffusion models can generate decent 3D objects based on prompts. 3D diffusion models have good 3D consistency, but their quality and generalization are limited as trainable 3D data is expensive and hard to obtain. 2D diffusion models enjoy strong abilities of generalization and fine generation, but the 3D consistency is hard to guarantee. This paper attempts to bridge the power from the two types of diffusion models via the recent explicit and efficient 3D Gaussian splatting representation. A fast 3D generation framework, named as GaussianDreamer, is proposed, where the 3D diffusion model provides point cloud priors for initialization and the 2D diffusion model enriches the geometry and appearance. Operations of noisy point growing and color perturbation are introduced to enhance the initialized Gaussians. Our GaussianDreamer can generate a high-quality 3D instance within 25 minutes on one GPU, much faster than previous methods, while the generated instances can be directly rendered in real time.
 ![block](./images/reoutput.gif)
+## 🦾 Updates
+- 10/16/2023: The rough code has been released, and there may still be some issues. Please feel free to raise issues. And enjoy Colab demo:[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/camenduru/4DGaussians-colab/blob/main/GaussianDreamer.ipynb) 
 
-**Our code will be released at the end of October**
-## Citation
+
+## 🏁 Get Started
+**Installation**
+
+Install [3D Gaussian Splatting](https://github.com/graphdeco-inria/gaussian-splatting) and [Shap-E](https://github.com/openai/shap-e#usage) as fellow:
+```
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+pip install ninja
+pip install -r requirements.txt
+
+git clone https://github.com/hustvl/GaussianDreamer.git 
+cd GaussianDreamer
+
+pip install ./gaussiansplatting/submodules/diff-gaussian-rasterization
+pip install ./gaussiansplatting/submodules/simple-knn
+
+git clone https://github.com/openai/shap-e.git
+pip install -e .
+```
+**Quickstart**
+```
+python launch.py --config configs/gaussiandreamer-sd.yaml --train --gpu 0 system.prompt_processor.prompt="a fox"
+```
+
+
+## 📑 Citation
 If you find this repository/work helpful in your research, welcome to cite the paper and give a ⭐.
+Some source code of ours is borrowed from [Threestudio](https://github.com/threestudio-project/threestudio), [3DGS](https://github.com/graphdeco-inria/gaussian-splatting), [depth-diff-gaussian-rasterization](https://github.com/ingra14m/depth-diff-gaussian-rasterization). We sincerely appreciate the excellent works of these authors.
 ```
 @article{GaussianDreamer,
         title={GaussianDreamer: Fast Generation from Text to 3D Gaussian Splatting with Point Cloud Priors},
