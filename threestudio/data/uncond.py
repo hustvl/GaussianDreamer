@@ -459,7 +459,7 @@ class RandomCameraIterableDataset(IterableDataset, Updateable):
 
         c2w_3dgs = []
         for id in range(self.batch_size):
-            render_pose = pose_spherical( azimuth_deg[id] + 180.0, -elevation_deg[id], camera_distances[id])
+            render_pose = pose_spherical( azimuth_deg[id] , -elevation_deg[id], camera_distances[id])
             # print(azimuth_deg[id] , -elevation_deg[id], camera_distances[id]*2.0)
             # print(render_pose)
 
@@ -582,7 +582,7 @@ class RandomCameraDataset(Dataset):
 
         c2w_3dgs = []
         for id in range(self.n_views):
-            render_pose = pose_spherical( azimuth_deg[id] + 180.0, -elevation_deg[id], camera_distances[id])
+            render_pose = pose_spherical( azimuth_deg[id] , -elevation_deg[id], camera_distances[id])
             
             matrix = torch.linalg.inv(render_pose)
             # R = -np.transpose(matrix[:3,:3])
