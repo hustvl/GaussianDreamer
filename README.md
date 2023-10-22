@@ -16,6 +16,7 @@
 In recent times, the generation of 3D assets from text prompts has shown impressive results. Both 2D and 3D diffusion models can generate decent 3D objects based on prompts. 3D diffusion models have good 3D consistency, but their quality and generalization are limited as trainable 3D data is expensive and hard to obtain. 2D diffusion models enjoy strong abilities of generalization and fine generation, but the 3D consistency is hard to guarantee. This paper attempts to bridge the power from the two types of diffusion models via the recent explicit and efficient 3D Gaussian splatting representation. A fast 3D generation framework, named as GaussianDreamer, is proposed, where the 3D diffusion model provides point cloud priors for initialization and the 2D diffusion model enriches the geometry and appearance. Operations of noisy point growing and color perturbation are introduced to enhance the initialized Gaussians. Our GaussianDreamer can generate a high-quality 3D instance within 25 minutes on one GPU, much faster than previous methods, while the generated instances can be directly rendered in real time.
 ![block](./images/reoutput.gif)
 ## 🦾 Updates
+- 10/21/2023: Fixed some installation issues, thanks to Sikuang Li, [Tawfik Boujeh](), and [ashawkey](https://github.com/ashawkey/diff-gaussian-rasterization). You can view the detailed information in branch diff.
 - 10/16/2023: The rough code has been released, and there may still be some issues. Please feel free to raise issues. 
 
 
@@ -23,7 +24,7 @@ In recent times, the generation of 3D assets from text prompts has shown impress
 **Installation**
 Install [3D Gaussian Splatting](https://github.com/graphdeco-inria/gaussian-splatting) and [Shap-E](https://github.com/openai/shap-e#usage) as fellow:
 ```
-conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=11.7 -c pytorch -c nvidia
+pip install torch==2.0.1+cu117 torchvision==0.15.2+cu117 torchaudio==2.0.2 --index-url https://download.pytorch.org/whl/cu117
 pip install ninja
 pip install -r requirements.txt
 
