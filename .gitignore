@@ -187,3 +187,5 @@ outputs-gradio/
 
 # wandb
 wandb/
+outputs/
+load/

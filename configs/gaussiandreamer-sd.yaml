@@ -5,7 +5,7 @@ seed: 0
  
 data_type: "random-camera-datamodule"
 data:
-  batch_size: 8
+  batch_size: 4
   eval_camera_distance: 4.0
   camera_distance_range: [1.5, 4.0]
   light_sample_strategy: "dreamfusion3dgs"
@@ -17,10 +17,12 @@ data:
 system_type: "gaussiandreamer-system"
 system:
   radius: ${data.eval_camera_distance}
+  sh_degree: 0
   prompt_processor_type: "stable-diffusion-prompt-processor"
   prompt_processor:
     pretrained_model_name_or_path: "stabilityai/stable-diffusion-2-1-base"
     prompt: ???
+    negative_prompt: "ugly, bad anatomy, blurry, pixelated obscure, unnatural colors, poor lighting, dull, and unclear, cropped, lowres, low quality, artifacts, duplicate, morbid, mutilated, poorly drawn face, deformed, dehydrated, bad proportions, unfocused"
 
   guidance_type: "stable-diffusion-guidance"
   guidance:
@@ -60,5 +62,3 @@ checkpoint:
   save_last: true # save at each validation time
   save_top_k: -1
   every_n_train_steps: ${trainer.max_steps}
-
-# white_background: true

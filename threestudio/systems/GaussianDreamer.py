@@ -77,11 +77,14 @@ class GaussianDreamer(BaseLift3DSystem):
     @dataclass
     class Config(BaseLift3DSystem.Config):
         radius: float = 4
+        sh_degree: int = 0
+
 
     cfg: Config
     def configure(self) -> None:
         self.radius = self.cfg.radius
-        self.gaussian = GaussianModel(sh_degree = 0)
+        self.sh_degree =self.cfg.sh_degree
+        self.gaussian = GaussianModel(sh_degree = self.sh_degree)
         bg_color = [1, 1, 1] if False else [0, 0, 0]
         self.background_tensor = torch.tensor(bg_color, dtype=torch.float32, device="cuda")
 
