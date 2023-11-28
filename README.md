@@ -47,8 +47,9 @@ Download [finetuned Shap-E](https://huggingface.co/datasets/tiange/Cap3D/tree/ma
 ```
 python launch.py --config configs/gaussiandreamer-sd.yaml --train --gpu 0 system.prompt_processor.prompt="a fox"
 
-python launch.py --config configs/gaussiandreamer-sd.yaml --train --gpu 0 system.sh_degree=3 
 # if you want to import the generated 3D assets into the Unity game engine.
+python launch.py --config configs/gaussiandreamer-sd.yaml --train --gpu 0 system.prompt_processor.prompt="a fox" system.sh_degree=3 
+
 
 ```
 
