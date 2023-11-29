@@ -27,43 +27,6 @@ import numpy as np
 def safe_normalize(x, eps=1e-20):
     return x / torch.sqrt(torch.clamp(torch.sum(x * x, -1, keepdim=True), min=eps))
 
-def convert_camera_to_world_transform(transform):
-    # 将右手坐标系的变换矩阵转换为左手坐标系
-    
-    # 复制原始变换矩阵
-    converted_transform = transform.clone()
-    
-    # 反转观察方向（将平移分量的第三个元素乘以-1）
-    converted_transform[:, 2] *= -1
-    
-    # 交换第一行和第三行
-    converted_transform[[0, 2], :] = converted_transform[[2, 0], :]
-    
-    return converted_transform
-
-def circle_poses(device, radius=torch.tensor([3.2]), theta=torch.tensor([60]), phi=torch.tensor([0])):
-
-    theta = theta / 180 * np.pi
-    phi = phi / 180 * np.pi
-
-    centers = torch.stack([
-        radius * torch.sin(theta) * torch.sin(phi),
-        radius * torch.cos(theta),
-        radius * torch.sin(theta) * torch.cos(phi),
-    ], dim=-1) # [B, 3]
-
-    # lookat
-    forward_vector = safe_normalize(centers)
-    up_vector = torch.FloatTensor([0, 1, 0]).to(device).unsqueeze(0).repeat(len(centers), 1)
-    right_vector = safe_normalize(torch.cross(forward_vector, up_vector, dim=-1))
-    up_vector = safe_normalize(torch.cross(right_vector, forward_vector, dim=-1))
-
-    poses = torch.eye(4, dtype=torch.float, device=device).unsqueeze(0).repeat(len(centers), 1, 1)
-    poses[:, :3, :3] = torch.stack((right_vector, up_vector, forward_vector), dim=-1)
-    poses[:, :3, 3] = centers
-
-    return poses
-
 trans_t = lambda t : torch.Tensor([
     [1,0,0,0],
     [0,1,0,0],
@@ -82,39 +45,6 @@ rot_theta = lambda th : torch.Tensor([
     [np.sin(th),0, np.cos(th),0],
     [0,0,0,1]]).float()
 
-def rodrigues_mat_to_rot(R):
-  eps =1e-16
-  trc = np.trace(R)
-  trc2 = (trc - 1.)/ 2.
-  #sinacostrc2 = np.sqrt(1 - trc2 * trc2)
-  s = np.array([R[2, 1] - R[1, 2], R[0, 2] - R[2, 0], R[1, 0] - R[0, 1]])
-  if (1 - trc2 * trc2) >= eps:
-    tHeta = np.arccos(trc2)
-    tHetaf = tHeta / (2 * (np.sin(tHeta)))
-  else:
-    tHeta = np.real(np.arccos(trc2))
-    tHetaf = 0.5 / (1 - tHeta / 6)
-  omega = tHetaf * s
-  return omega
-
-def rodrigues_rot_to_mat(r):
-  wx,wy,wz = r
-  theta = np.sqrt(wx * wx + wy * wy + wz * wz)
-  a = np.cos(theta)
-  b = (1 - np.cos(theta)) / (theta*theta)
-  c = np.sin(theta) / theta
-  R = np.zeros([3,3])
-  R[0, 0] = a + b * (wx * wx)
-  R[0, 1] = b * wx * wy - c * wz
-  R[0, 2] = b * wx * wz + c * wy
-  R[1, 0] = b * wx * wy + c * wz
-  R[1, 1] = a + b * (wy * wy)
-  R[1, 2] = b * wy * wz - c * wx
-  R[2, 0] = b * wx * wz - c * wy
-  R[2, 1] = b * wz * wy + c * wx
-  R[2, 2] = a + b * (wz * wz)
-  return R
-
 
 def pose_spherical(theta, phi, radius):
     c2w = trans_t(radius)
@@ -122,42 +52,6 @@ def pose_spherical(theta, phi, radius):
     c2w = rot_theta(theta/180.*np.pi) @ c2w
     c2w = torch.Tensor(np.array([[-1,0,0,0],[0,0,1,0],[0,1,0,0],[0,0,0,1]])) @ c2w
     return c2w
-
-def convert_camera_pose(camera_pose):
-    # Clone the tensor to avoid in-place operations
-    colmap_pose = camera_pose.clone()
-
-    # Extract rotation and translation components
-    rotation = colmap_pose[:, :3, :3]
-    translation = colmap_pose[:, :3, 3]
-
-    # Change rotation orientation
-    rotation[:, 0, :] *= -1
-    rotation[:, 1, :] *= -1
-
-    # Change translation position
-    translation[:, 0] *= -1
-    translation[:, 1] *= -1
-
-    return colmap_pose
-
-def convert_camera_pose(camera_pose):
-    # Clone the tensor to avoid in-place operations
-    colmap_pose = camera_pose.clone()
-
-    # Extract rotation and translation components
-    rotation = colmap_pose[:, :3, :3]
-    translation = colmap_pose[:, :3, 3]
-
-    # Change rotation orientation
-    rotation[:, 0, :] *= -1
-    rotation[:, 1, :] *= -1
-
-    # Change translation position
-    translation[:, 0] *= -1
-    translation[:, 1] *= -1
-    
-    return colmap_pose
 
 @dataclass
 class RandomCameraDataModuleConfig:
@@ -190,6 +84,7 @@ class RandomCameraDataModuleConfig:
     light_sample_strategy: str = "dreamfusion"
     batch_uniform_azimuth: bool = True
     progressive_until: int = 0  # progressive ranges for elevation, azimuth, r, fovy
+    load_type: int = 0
 
 
 class RandomCameraIterableDataset(IterableDataset, Updateable):
@@ -235,6 +130,8 @@ class RandomCameraIterableDataset(IterableDataset, Updateable):
         self.azimuth_range = self.cfg.azimuth_range
         self.camera_distance_range = self.cfg.camera_distance_range
         self.fovy_range = self.cfg.fovy_range
+        self.load_type = self.cfg.load_type
+
 
     def update_step(self, epoch: int, global_step: int, on_load_weights: bool = False):
         size_ind = bisect.bisect_right(self.resolution_milestones, global_step) - 1
@@ -459,7 +356,7 @@ class RandomCameraIterableDataset(IterableDataset, Updateable):
 
         c2w_3dgs = []
         for id in range(self.batch_size):
-            render_pose = pose_spherical( azimuth_deg[id] + 180.0, -elevation_deg[id], camera_distances[id])
+            render_pose = pose_spherical( azimuth_deg[id] + 180.0 - self.load_type*90 , -elevation_deg[id], camera_distances[id])
             # print(azimuth_deg[id] , -elevation_deg[id], camera_distances[id]*2.0)
             # print(render_pose)
 
@@ -502,6 +399,7 @@ class RandomCameraDataset(Dataset):
         super().__init__()
         self.cfg: RandomCameraDataModuleConfig = cfg
         self.split = split
+        self.load_type = self.cfg.load_type
 
         if split == "val":
             self.n_views = self.cfg.n_val_views
@@ -511,9 +409,9 @@ class RandomCameraDataset(Dataset):
         azimuth_deg: Float[Tensor, "B"]
         if self.split == "val":
             # make sure the first and last view are not the same
-            azimuth_deg = torch.linspace(-180., 180.0, self.n_views + 1)[: self.n_views]
+            azimuth_deg = torch.linspace(0., 360.0, self.n_views + 1)[: self.n_views]
         else:
-            azimuth_deg = torch.linspace(-180., 180.0, self.n_views)
+            azimuth_deg = torch.linspace(0., 360.0, self.n_views)
         elevation_deg: Float[Tensor, "B"] = torch.full_like(
             azimuth_deg, self.cfg.eval_elevation_deg
         )
@@ -582,7 +480,7 @@ class RandomCameraDataset(Dataset):
 
         c2w_3dgs = []
         for id in range(self.n_views):
-            render_pose = pose_spherical( azimuth_deg[id] + 180.0, -elevation_deg[id], camera_distances[id])
+            render_pose = pose_spherical( azimuth_deg[id] + 180.0 - self.load_type*90, -elevation_deg[id], camera_distances[id])
             
             matrix = torch.linalg.inv(render_pose)
             # R = -np.transpose(matrix[:3,:3])

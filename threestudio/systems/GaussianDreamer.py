@@ -78,12 +78,18 @@ class GaussianDreamer(BaseLift3DSystem):
     class Config(BaseLift3DSystem.Config):
         radius: float = 4
         sh_degree: int = 0
+        load_type: int = 0
+        load_path: str = "./load/shapes/stand.obj"
+
 
 
     cfg: Config
     def configure(self) -> None:
         self.radius = self.cfg.radius
         self.sh_degree =self.cfg.sh_degree
+        self.load_type =self.cfg.load_type
+        self.load_path = self.cfg.load_path
+
         self.gaussian = GaussianModel(sh_degree = self.sh_degree)
         bg_color = [1, 1, 1] if False else [0, 0, 0]
         self.background_tensor = torch.tensor(bg_color, dtype=torch.float32, device="cuda")
@@ -183,18 +189,38 @@ class GaussianDreamer(BaseLift3DSystem):
         all_coords = np.concatenate([all_coords,coords],axis=0)
         all_rgb = np.concatenate([all_rgb,rgb],axis=0)
         return all_coords,all_rgb
+
+    def smpl(self):
+        self.num_pts  = 50000
+        mesh = o3d.io.read_triangle_mesh(self.load_path)
+        point_cloud = mesh.sample_points_uniformly(number_of_points=self.num_pts)
+        coords = np.array(point_cloud.points)
+        shs = np.random.random((self.num_pts, 3)) / 255.0
+        rgb = SH2RGB(shs)
+        adjusment = np.zeros_like(coords)
+        adjusment[:,0] = coords[:,2]
+        adjusment[:,1] = coords[:,0]
+        adjusment[:,2] = coords[:,1]
+        current_center = np.mean(adjusment, axis=0)
+        center_offset = -current_center
+        adjusment += center_offset
+        return adjusment,rgb,0.5
     
     def pcb(self):
         # Since this data set has no colmap data, we start with random points
-
-        coords,rgb,scale = self.shape()
-
+        if self.load_type==0:
+            coords,rgb,scale = self.shape()
+        elif self.load_type==1:
+            coords,rgb,scale = self.smpl()
+        else:
+            raise NotImplementedError
+        
         bound= self.radius*scale
 
         all_coords,all_rgb = self.add_points(coords,rgb)
         
 
-        pcd = BasicPointCloud(points=all_coords *bound, colors=all_rgb, normals=np.zeros((self.num_pts, 3)))
+        pcd = BasicPointCloud(points=all_coords *bound, colors=all_rgb, normals=np.zeros((all_coords.shape[0], 3)))
 
         return pcd
     
@@ -479,11 +505,12 @@ class GaussianDreamer(BaseLift3DSystem):
             name="test",
             step=self.true_global_step,
         )
-        save_path = self.get_save_path(f"last.ply")
+        save_path = self.get_save_path(f"last_3dgs.ply")
         self.gaussian.save_ply(save_path)
         # self.pointefig.savefig(self.get_save_path("pointe.png"))
-        o3d.io.write_point_cloud(self.get_save_path("shape.ply"), self.point_cloud)
-        self.save_gif_to_file(self.shapeimages, self.get_save_path("shape.gif"))
+        if self.load_type==0:
+            o3d.io.write_point_cloud(self.get_save_path("shape.ply"), self.point_cloud)
+            self.save_gif_to_file(self.shapeimages, self.get_save_path("shape.gif"))
         load_ply(save_path,self.get_save_path(f"it{self.true_global_step}-test-color.ply"))
         
 

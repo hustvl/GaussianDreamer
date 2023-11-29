@@ -44,14 +44,23 @@ pip install -e .
 Download [finetuned Shap-E](https://huggingface.co/datasets/tiange/Cap3D/tree/main/our_finetuned_models) by Cap3D, and put it in `./load`
 
 **Quickstart**
+
+Text-to-3D Generation
 ```
 python launch.py --config configs/gaussiandreamer-sd.yaml --train --gpu 0 system.prompt_processor.prompt="a fox"
 
 # if you want to import the generated 3D assets into the Unity game engine.
 python launch.py --config configs/gaussiandreamer-sd.yaml --train --gpu 0 system.prompt_processor.prompt="a fox" system.sh_degree=3 
-
-
 ```
+
+Text-to-Avatar Generation
+```
+python launch.py --config configs/gaussiandreamer-sd.yaml --train --gpu 0 system.prompt_processor.prompt="Spiderman stands with open arms" system.load_type=1
+
+# if you want to import the generated 3D assets into the Unity game engine.
+python launch.py --config configs/gaussiandreamer-sd.yaml --train --gpu 0 system.prompt_processor.prompt="Spiderman stands with open arms" system.load_type=1 system.sh_degree=3 
+```
+
 
 **Application**
 

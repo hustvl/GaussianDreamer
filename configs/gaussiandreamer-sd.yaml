@@ -5,6 +5,7 @@ seed: 0
  
 data_type: "random-camera-datamodule"
 data:
+  load_type: ${system.load_type}
   batch_size: 4
   eval_camera_distance: 4.0
   camera_distance_range: [1.5, 4.0]
@@ -16,6 +17,8 @@ data:
   # elevation_range: [-10 , 80]
 system_type: "gaussiandreamer-system"
 system:
+  load_type: 0 # 0: load from shape, 1: load from smpl
+  load_path: "./load/shapes/stand.obj" # only used when load_type == 1
   radius: ${data.eval_camera_distance}
   sh_degree: 0
   prompt_processor_type: "stable-diffusion-prompt-processor"
