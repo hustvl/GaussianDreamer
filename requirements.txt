@@ -1,6 +1,4 @@
-torch==2.0.1+cu117
-torchvision==0.15.2+cu117 
-torchaudio==2.0.2 
+torch==2.0.1
 lightning==2.0.0
 omegaconf==2.3.0
 jaxtyping
