@@ -24,9 +24,9 @@ In recent times, the generation of 3D assets from text prompts has shown impress
 - 10/16/2023: The rough code has been released, and there may still be some issues. Please feel free to raise issues. 
 
 ## 😀 Demo
-Colab demo: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/taoranyi/GaussianDreamer-colab/blob/main/GaussianDreamer_colab.ipynb) (Thanks [camenduru](https://github.com/camenduru/GaussianDreamer-colab).)
-
 Huggingface demo: <a href="https://huggingface.co/spaces/thewhole/GaussianDreamer_Demo"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Gradio%20Demo-Huggingface-orange"></a>
+
+Colab demo: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/taoranyi/GaussianDreamer-colab/blob/main/GaussianDreamer_colab.ipynb) (Thanks [camenduru](https://github.com/camenduru/GaussianDreamer-colab).)
 
 
 ## 🏁 Get Started
