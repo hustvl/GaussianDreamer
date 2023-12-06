@@ -17,6 +17,7 @@ In recent times, the generation of 3D assets from text prompts has shown impress
 ![block](./images/output_gs.gif)
 
 ## 🦾 Updates
+- 12/6/2023: Update [arxiv paper](https://arxiv.org/abs/2310.08529).
 - 11/27/2023: Update colab and huggingface demo.
 - 11/27/2023: Release the results initialized using point clouds with ground. And now we support importing the generated 3D assets into the Unity game engine with the help of [UnityGaussianSplatting](https://github.com/aras-p/UnityGaussianSplatting). See the [Project Page](https://taoranyi.com/gaussiandreamer/) for details.
 - 10/24/2023: Release the results initialized using SMPL. See the [Project Page](https://taoranyi.com/gaussiandreamer/)  for details.
