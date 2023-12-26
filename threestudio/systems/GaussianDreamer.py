@@ -142,7 +142,7 @@ class GaussianDreamer(BaseLift3DSystem):
         pc = decode_latent_mesh(xm, latents[0]).tri_mesh()
 
 
-        skip = 4
+        skip = 1
         coords = pc.verts
         rgb = np.concatenate([pc.vertex_channels['R'][:,None],pc.vertex_channels['G'][:,None],pc.vertex_channels['B'][:,None]],axis=1) 
 
