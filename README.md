@@ -80,10 +80,11 @@ Import the generated 3D assets into the Unity game engine to become materials fo
 If you find this repository/work helpful in your research, welcome to cite the paper and give a ⭐.
 Some source code of ours is borrowed from [Threestudio](https://github.com/threestudio-project/threestudio), [3DGS](https://github.com/graphdeco-inria/gaussian-splatting), [depth-diff-gaussian-rasterization](https://github.com/ingra14m/depth-diff-gaussian-rasterization). We sincerely appreciate the excellent works of these authors.
 ```
-@article{yi2023gaussiandreamer,
+@inproceedings{yi2023gaussiandreamer,
   title={GaussianDreamer: Fast Generation from Text to 3D Gaussians by Bridging 2D and 3D Diffusion Models},
   author={Yi, Taoran and Fang, Jiemin and Wang, Junjie and Wu, Guanjun and Xie, Lingxi and Zhang, Xiaopeng and Liu, Wenyu and Tian, Qi and Wang, Xinggang},
-  journal={CVPR},
-  year={2024}
+  year = {2024},
+  booktitle = {CVPR}
+
 }
 ```
