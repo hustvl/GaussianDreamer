@@ -85,6 +85,5 @@ Some source code of ours is borrowed from [Threestudio](https://github.com/three
   author={Yi, Taoran and Fang, Jiemin and Wang, Junjie and Wu, Guanjun and Xie, Lingxi and Zhang, Xiaopeng and Liu, Wenyu and Tian, Qi and Wang, Xinggang},
   year = {2024},
   booktitle = {CVPR}
-
 }
 ```
