@@ -1,6 +1,6 @@
 ![block](./images/title.gif)
 
-# GaussianDreamer: Fast Generation from Text to 3D Gaussians by Bridging 2D and 3D Diffusion Models
+# GaussianDreamer: Fast Generation from Text to 3D Gaussians by Bridging 2D and 3D Diffusion Models (CVPR 2024)
 ### [Project Page](https://taoranyi.com/gaussiandreamer/) | [arxiv Paper](https://arxiv.org/abs/2310.08529)
 
 [GaussianDreamer: Fast Generation from Text to 3D Gaussians by Bridging 2D and 3D Diffusion Models](https://taoranyi.com/gaussiandreamer/)  
@@ -17,6 +17,7 @@ In recent times, the generation of 3D assets from text prompts has shown impress
 ![block](./images/output_gs.gif)
 
 ## 🦾 Updates
+- 2/27/2024: Accepted by CVPR 2024.
 - 12/6/2023: Update [arxiv paper](https://arxiv.org/abs/2310.08529).
 - 11/27/2023: Update colab and huggingface demo.
 - 11/27/2023: Release the results initialized using point clouds with ground. And now we support importing the generated 3D assets into the Unity game engine with the help of [UnityGaussianSplatting](https://github.com/aras-p/UnityGaussianSplatting). See the [Project Page](https://taoranyi.com/gaussiandreamer/) for details.
@@ -82,7 +83,7 @@ Some source code of ours is borrowed from [Threestudio](https://github.com/three
 @article{yi2023gaussiandreamer,
   title={GaussianDreamer: Fast Generation from Text to 3D Gaussians by Bridging 2D and 3D Diffusion Models},
   author={Yi, Taoran and Fang, Jiemin and Wang, Junjie and Wu, Guanjun and Xie, Lingxi and Zhang, Xiaopeng and Liu, Wenyu and Tian, Qi and Wang, Xinggang},
-  journal={arXiv preprint arXiv:2310.08529},
-  year={2023}
+  journal={CVPR},
+  year={2024}
 }
 ```
