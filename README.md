@@ -17,6 +17,7 @@ In recent times, the generation of 3D assets from text prompts has shown impress
 ![block](./images/output_gs.gif)
 
 ## 🦾 Updates
+- 3/8/2024: We also provide a [GaussianDreamer extension for threestudio](https://github.com/cxh0519/threestudio-gaussiandreamer). Thanks for the contribution of [Xinhua Cheng](https://github.com/cxh0519/).
 - 2/27/2024: Accepted by CVPR 2024.
 - 12/6/2023: Update [arxiv paper](https://arxiv.org/abs/2310.08529).
 - 11/27/2023: Update colab and huggingface demo.
