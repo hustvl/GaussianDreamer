@@ -76,6 +76,7 @@ python launch.py --config configs/gaussiandreamer-sd.yaml --train --gpu 0 system
 Import the generated 3D assets into the Unity game engine to become materials for games and designs with the help of [UnityGaussianSplatting](https://github.com/aras-p/UnityGaussianSplatting).
 ![block](./images/unity.gif)
 
+We also provide a [GaussianDreamer extension for threestudio](https://github.com/cxh0519/threestudio-gaussiandreamer). Thanks for the contribution of [Xinhua Cheng](https://github.com/cxh0519/).
 
 ## 📑 Citation
 If you find this repository/work helpful in your research, welcome to cite the paper and give a ⭐.
