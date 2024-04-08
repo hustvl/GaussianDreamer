@@ -18,7 +18,6 @@ libigl
 xatlas
 trimesh[easy]
 networkx
-pysdf
 PyMCubes
 wandb
 gradio
