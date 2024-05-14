@@ -17,6 +17,7 @@ In recent times, the generation of 3D assets from text prompts has shown impress
 ![block](./images/output_gs.gif)
 
 ## 🦾 Updates
+- 5/14/2024: We update the results of our method on [T<sup>3</sup>Bench](https://t3bench.com/), refer to [arxiv paper](https://arxiv.org/abs/2310.08529v3) for details.
 - 3/8/2024: We also provide a [GaussianDreamer extension for threestudio](https://github.com/cxh0519/threestudio-gaussiandreamer). Thanks for the contribution of [Xinhua Cheng](https://github.com/cxh0519/).
 - 2/27/2024: Accepted by CVPR 2024.
 - 12/6/2023: Update [arxiv paper](https://arxiv.org/abs/2310.08529).
@@ -32,7 +33,7 @@ Huggingface demo: <a href="https://huggingface.co/spaces/thewhole/GaussianDreame
 Colab demo: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/taoranyi/GaussianDreamer-colab/blob/main/GaussianDreamer_colab.ipynb) (Thanks [camenduru](https://github.com/camenduru/GaussianDreamer-colab).)
 
 
-## 🏁 Get Started
+## 🚀 Get Started
 **Installation**
 Install [3D Gaussian Splatting](https://github.com/graphdeco-inria/gaussian-splatting) and [Shap-E](https://github.com/openai/shap-e#usage) as fellow:
 ```
@@ -76,6 +77,28 @@ python launch.py --config configs/gaussiandreamer-sd.yaml --train --gpu 0 system
 Import the generated 3D assets into the Unity game engine to become materials for games and designs with the help of [UnityGaussianSplatting](https://github.com/aras-p/UnityGaussianSplatting).
 ![block](./images/unity.gif)
 
+## 🏁 Evaluation
+We evaluate our model using the ViT similarity and [T<sup>3</sup>Bench](https://t3bench.com/), and the results are as follows.
+
+
+###  ViT similarity
+| **Methods** | **ViT-L/14 $\uparrow$** | **ViT-bigG-14 $\uparrow$** | **Generation Time $\downarrow$** |
+| --- | --- | --- | --- |
+| Shap-E | 20.51 | 32.21 | 6 seconds |
+| DreamFusion| 23.60 | 37.46 | 1.5 hours |
+| ProlificDreamer| 27.39 | 42.98 | 10 hours |
+| Instant3D| 26.87 | 41.77 | 20 seconds |
+| Ours | 27.23 $\pm$ 0.06 | 41.88 $\pm$ 0.04 | 15 minutes |
+### [T<sup>3</sup>Bench](https://t3bench.com/)
+| **Methods** | **Time** | **Single Obj.** | **Single w/ Surr.** | **Multi Obj.** | **Average** |
+| --- | --- | --- | --- | --- | --- |
+| SJC | -- | 24.7 | 19.8 | 11.7 | 18.7 |
+| DreamFusion | 6 hours | 24.4 | 24.6 | 16.1 | 21.7 |
+| Fantasia3D| 6 hours | 26.4 | 27.0 | 18.5 | 24.0 |
+| LatentNeRF| 15 minutes | 33.1 | 30.6 | 20.6 | 28.1 |
+| Magic3D| 5.3 hours | 37.0 | 35.4 | 25.7 | 32.7 |
+| ProlificDreamer| 10 hours | 49.4 | 44.8 | **35.8** | 43.3 |
+| Ours | 15 minutes | **54.0** | **48.6** | 34.5 | **45.7** |
 
 ## 📑 Citation
 If you find this repository/work helpful in your research, welcome to cite the paper and give a ⭐.
