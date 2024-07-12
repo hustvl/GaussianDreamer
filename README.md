@@ -52,7 +52,7 @@ git clone https://github.com/openai/shap-e.git
 cd shap-e
 pip install -e .
 ```
-Download [finetuned Shap-E](https://huggingface.co/datasets/tiange/Cap3D/tree/main/our_finetuned_models) by Cap3D, and put it in `./load`
+Download [finetuned Shap-E](https://huggingface.co/datasets/tiange/Cap3D/blob/main/misc/our_finetuned_models/shapE_finetuned_with_330kdata.pth) by Cap3D, and put it in `./load`
 
 **Quickstart**
 
