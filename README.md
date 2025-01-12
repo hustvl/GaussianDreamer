@@ -17,6 +17,7 @@ In recent times, the generation of 3D assets from text prompts has shown impress
 ![block](./images/output_gs.gif)
 
 ## 🦾 Updates
+- 6/26/2024: We have released the code of [GaussianDreamerPro](https://taoranyi.com/gaussiandreamerpro/). Have a try!
 - 6/26/2024: We have released [GaussianDreamerPro](https://taoranyi.com/gaussiandreamerpro/) with highly enhanced quality which can be seamlessly integrated into animation/simulation pipelines🚀.
 - 5/14/2024: We update the results of our method on [T<sup>3</sup>Bench](https://t3bench.com/), refer to [arxiv paper](https://arxiv.org/abs/2310.08529v3) for details.
 - 3/8/2024: We also provide a [GaussianDreamer extension for threestudio](https://github.com/cxh0519/threestudio-gaussiandreamer). Thanks for the contribution of [Xinhua Cheng](https://github.com/cxh0519/).
